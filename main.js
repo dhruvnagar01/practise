@@ -23,13 +23,26 @@ addItem.style.color='green'
 
 // get elementByclassname
 
-var item = document.getElementsByClassName('list-group-item');
-console.log(item);
-console.log(item[1]);
-item[1].textContent='Hello Item 2';
-item[1].style.background='yellow';
-item[2].style.background='green';
+// var item = document.getElementsByClassName('list-group-item');
+// console.log(item);
+// console.log(item[1]);
+// item[1].textContent='Hello Item 2';
+// item[1].style.background='yellow';
+// item[2].style.background='green';
 
-for(var i=0; i<item.length;i++){
-    item[i].style.fontWeight ='bold';
+// for(var i=0; i<item.length;i++){
+//     item[i].style.fontWeight ='bold';
+// }
+
+// GetElementByTagName
+
+var li = document.getElementsByTagName('li');
+console.log(li);
+console.log(li[1]);
+li[1].textContent ='Hello Item 2';
+li[1].style.background='yellow';
+li[2].style.background='green';
+
+for(var i=0; i<li.length;i++){
+    li[i].style.fontWeight ='bold';
 }
