@@ -1,0 +1,16 @@
+[33mcommit 8b7d25ace6b2ca4ded4f7bd30c6d2f879583fd99[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: dhruvnagar01 <iitscooldhruv@gmail.com>
+Date:   Wed Oct 11 19:54:43 2023 +0530
+
+    commit udpated for 2nd updated
+
+[1mdiff --git a/main.js b/main.js[m
+[1mindex 73ad055..779f788 100644[m
+[1m--- a/main.js[m
+[1m+++ b/main.js[m
+[36m@@ -1 +1,2 @@[m
+[31m-console.log("HEllo I am git and working fine");[m
+\ No newline at end of file[m
+[32m+[m[32mconsole.log("HEllo I am git and working fine");[m
+[32m+[m[32mconsole.log("comit 2 updated")[m
+\ No newline at end of file[m
