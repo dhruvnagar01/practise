@@ -1,13 +1,20 @@
-var form = document.getElementById('my-form');
+const form = document.getElementById('my-form');
 
-form.addEventListener('submit', formData);
+form.addEventListener('submit', function(e) {
+    formData(e, form);
+});
+// const name = document.getElementById('name').value;
+// const email = document.getElementById('email').value;
 
-function formData(e) {
+let user = {
+   name : 'dhruv',
+   email : 'dhruv@tgmail.com'
+}
+
+function formData(e, form) {
     e.preventDefault();
-    var name = document.getElementById('name').value;
-    var email = document.getElementById('email').value;
-
-    localStorage.setItem('Name',name);
-    localStorage.setItem('Email', email);
-
+   
+    
+   let data = JSON.stringify(user);
+   localStorage.setItem('user',data)
 }
