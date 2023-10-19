@@ -1,8 +1,10 @@
 const form = document.getElementById('myForm');
+const submitBtn = document.getElementById('submitBtn');
+
 window.loadData();
 
 
-form.addEventListener('submit', function(e) {
+submitBtn.addEventListener('click', function(e) {
    
     e.preventDefault();
 
@@ -17,18 +19,26 @@ form.addEventListener('submit', function(e) {
     };
 
     // localStorage.setItem(user.email, JSON.stringify(user));
-    axios.post("https://crudcrud.com/api/ae4a964828be4c08b9d42d3ce6ece679/createData", user).then((result) => {
+    axios.post("https://crudcrud.com/api/9b13972b29e84152a7f1e7906984238f/createData", user).then((result) => {
         
         toshow(result.data);
     }).catch((err) => {
      console.log(err);   
     });
 
+
+    name.value = "";
+    email.value = '';
+   phone.value = '';
     
 });
 
+
+                 // get data form server
+
+
 function loadData() {
-        axios.get("https://crudcrud.com/api/ae4a964828be4c08b9d42d3ce6ece679/createData").then((result) => {
+        axios.get("https://crudcrud.com/api/9b13972b29e84152a7f1e7906984238f/createData").then((result) => {
             result.data.forEach(element => {
                 toshow(element);        
                 console.log(element);
@@ -39,6 +49,9 @@ function loadData() {
 
 }
 
+
+                                                    
+              // show data on DOM
 function toshow(obj){
       
     
@@ -61,12 +74,17 @@ function toshow(obj){
 //    // add both in li
    parentElem.appendChild(childElem);
    
+
    // delte button function
 deltebtn.addEventListener('click', (e)=> {
       e.preventDefault();
   
-     axios.delete("https://crudcrud.com/api/ae4a964828be4c08b9d42d3ce6ece679/createData",obj.id).then((result)=>
-     {  console.log(result)
+      //deleting data from row
+
+     axios.delete("https://crudcrud.com/api/9b13972b29e84152a7f1e7906984238f/createData/" + obj._id).then((result)=>
+     {  
+        // console.log(result);
+        console.log("data deleted for " + obj.name);
         })
      .catch((error)=>console.log(error));
       var li = e.target.parentElement;
@@ -75,24 +93,68 @@ deltebtn.addEventListener('click', (e)=> {
   });
 
 
-//   editbtn.addEventListener('click', (e)=>{
-//     e.preventDefault();
-
-//     let user = localStorage.getItem(obj.email);
-//     let userData = JSON.parse(user);
+  editbtn.addEventListener('click', (e)=>{
+    e.preventDefault();
     
-//     let name = form.elements['name'];
-//     let email = form.elements['email'];
-//     let phone = form.elements['phone'];
+    // var userData;
+    
+    axios.get("https://crudcrud.com/api/9b13972b29e84152a7f1e7906984238f/createData/" + obj._id).then((result) => {
+                 
+            console.log(result);
+            dataEdit(result.data)
+        }).catch((error) => console.log(error));
+  
+      
+      // data to enter in form
+        function dataEdit(userData){
 
-//     name.value = userData.name;
-//     email.value = userData.email;
-//     phone.value = userData.phone;
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.style.display = 'none';
+
+            let updatedBtn = document.getElementById('updateBtn');
+            updatedBtn.style.display = 'inline';
+            
+    
+    let name = form.elements['name'];
+    let email = form.elements['email'];
+    let phone = form.elements['phone'];
+            
+    name.value = userData.name;
+    email.value = userData.email;
+    phone.value = userData.phone;
         
-//     //deleting list
-//     localStorage.removeItem(obj.email);
-//       var li = e.target.parentElement;
-//       parentElem.removeChild(li);
-// });
+    
+    
+    // to update the dataa
+    
+    updatedBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const namee = form.elements['name'];
+        const emaill = form.elements['email'];
+        const phonee = form.elements['phone'];
+    
+        let updatedUser = {
+            name : name.value,
+            email : email.value,
+            phone : phone.value
+        };
+
+        
+        axios.put("https://crudcrud.com/api/9b13972b29e84152a7f1e7906984238f/createData/" + obj._id, updatedUser).then((result)=>
+        {  console.log(result)
+            console.log('data updated surccessfully'+ result);
+            console.log(result.config.data);
+           
+           })
+        .catch((error)=>console.log(error));
+
+        updatedBtn.style.display = 'none';
+        submitBtn.style.display = 'inline';
+        
+    })
+  
+  
+}
+})
     
 }
