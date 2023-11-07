@@ -21,7 +21,7 @@ const requestHandler = (req, res) => {
             return res.end();
         });
     }
-    
+
     else if(url === "/message" && method === "POST"){
         req.on("data", (chunk) => {
             body.push(chunk);
@@ -51,3 +51,5 @@ const requestHandler = (req, res) => {
         res.end();
     }
 };
+
+module.exports = requestHandler;
