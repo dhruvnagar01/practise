@@ -4,17 +4,22 @@ const express = require('express');
 
 const app = express();
 
-app.use((req, res, next) => {
-console.log('In the middleware');
-res.send('<h>Hello</h1>');
-next();
+app.use('/', (req, res, next) => {
+    console.log('This always runs!');
+   next();
+});
+
+app.use('/add-product', (req, res, next) => {
+console.log('In the middleware add product');
+res.send('<h1>The Add Product</h1>');
 });
 
 
-app.use((req, res, next) => {
-    console.log('In the another middleware');
-    res.send( { key1: value })
+app.use('/', (req, res, next) => {
+    console.log('In the middleware');
+    res.send('<h1>Hello</h1>');
     });
+
 
 // const server = http.createServer(app);
 // server.listen(4000);
