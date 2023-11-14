@@ -22,15 +22,22 @@ router.get('/logged', (req, res, next) => {
             console.log(err);
         }
         
-        res.write('<html>');
-        res.write('<head><title>Enter Message</title><head>');
-        res.write(`<body>${data}</body>`);
+        // res.write('<html>');
+        // res.write('<head><title>Enter Message</title><head>');
+        // res.write(`<body>${data}</body>`);
         
-        res.write('<body><form action="/logged/message" method="POST"><input type="text" name="message"><button type="submit">send</button></form></body>');
-        res.write('</html>');
-        return res.end();
+        // res.write('</html>');
+
+        res.send(` ${data} <br> <form action="/logged/message" method="POST" onsubmit="document.getElementById('username').value = localStorage.getItem('username')" >      
+        <input type="text" name="message" id="message">
+         <input type="hidden"  name="username" id="username"> 
+         <br>
+         <button type="submit">send</button>
+         </form>`);
+        
         
     });
+
     
 }); 
     
@@ -40,18 +47,17 @@ router.get('/logged', (req, res, next) => {
 
 router.post('/logged/message' , (req, res, next)=> {
    
-    const data = req.body.message +' ';
-    
-    const user = localStorage.get("userName");     
-    console.log("after logged in ", user);   
+    const messgae = req.body.message + ' \n';
 
-    fs.appendFile(chatFile , (user+ ": "+ data ) , (err) => {
+    const userName = req.body.username;
+
+    fs.appendFile(chatFile , (userName+ ": "+ messgae ) , (err) => {
         if(err){
             console.log(err);
             res.status(500).send("Internal server error");
             return;
         }
-        console.log(data);
+        console.log(messgae);
         console.log('POST WORKING');
         res.redirect('/logged')
         res.end()

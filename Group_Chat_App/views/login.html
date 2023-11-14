@@ -9,10 +9,13 @@
     <header>Login Page</header>
     <main>
         <div>
-        <form action="/" method="post">
-            <input type="text" name="userName" id="userName" required>
-            <button type="submit">Login</button>
-        </form>
+            <form onsubmit="localStorage.setItem(`username`, document.getElementById(`username`).value)" action="/" method="POST" >
+
+                <input id="username" type="text" name"title" required> 
+            
+                <button type="submit" >Login</button>
+            
+            </form>
     </div>
     </main>
 </body>
